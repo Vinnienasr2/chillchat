@@ -1,0 +1,218 @@
+#:import MDList kivymd.uix.list.MDList
+#:import MDRaisedButton kivymd.uix.button.MDRaisedButton
+#:import MDLabel kivymd.uix.label.MDLabel
+#:import ScreenManager kivy.uix.screenmanager.ScreenManager
+#:import Screen kivy.uix.screenmanager.Screen
+#:import OneLineAvatarIconListItem kivymd.uix.list.OneLineAvatarIconListItem
+
+
+<RegistrationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Widget:
+
+
+        Label:
+            text:'Welcome to ChillChat. We are very proud to have you. Join the global village by submitting you phone number.'
+            size_hint_y: None
+            text_size: 310, None
+            height: self.texture_size[1] 
+            color: 0 , 0 , 1 , 1
+        
+
+        MDTextField:
+            id: phone_number
+            hint_text: 'Phone Number'
+            helper_text: 'Enter your Phone Number'
+            helper_text_mode: 'on_focus'
+            input_filter: 'int'
+            line_color_normal: 1, 0, 1, 1
+            hint_text_color_normal: 1, 0, 1, 1
+            line_color_focus: "blue"
+            hint_text_color_focus: "blue"
+            text_color: "blue"
+            required: True
+            max_text_length: 12
+            size_hint: None, None
+            width: '320dp'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            
+        Widget:
+
+        MDRaisedButton:
+            text: 'Proceed'
+            on_press: app.register_user()
+            size_hint: None, None
+            size: dp(150), dp(50)
+            md_bg_color: 1, 0, 0.54, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    
+        Widget: 
+        Label:
+            text: 'From Vynoroid Technologies'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+
+<VerificationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        size_hint: None,None
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            
+
+        Widget:
+        
+        BoxLayout:
+            size_hint: None,None
+            width: dp(200)
+            height: dp(50)
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+
+            Widget:
+            
+            MDTextField:
+                id: digit1
+                hint_text: '1'
+                width: dp(80)
+                input_filter: 'int'
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: if len(self.text) == 1: app.focus_next(self, 'digit2')
+                
+            MDTextField:
+                id: digit2
+                hint_text: '2'
+                width: dp(80)
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: if len(self.text) == 1: app.focus_next(self, 'digit3')
+                
+            MDTextField:
+                id: digit3
+                hint_text: '3'
+                width: dp(80)
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: if len(self.text) == 1: app.focus_next(self, 'digit4')
+                
+            MDTextField:
+                id: digit4
+                hint_text: '4'
+                width: dp(80)
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: if len(self.text) == 1: app.focus_next(self, 'digit5')
+                
+            MDTextField:
+                id: digit5
+                hint_text: '5'
+                width: dp(80)
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: if len(self.text) == 1: app.focus_next(self, 'digit6')
+                
+            MDTextField:
+                id: digit6
+                hint_text: '6'
+                width: dp(80)
+                line_color_normal: 1, 0, 1, 1
+                hint_text_color_normal: 1, 0, 1, 1
+                line_color_focus: "blue"
+                hint_text_color_focus: "blue"
+                on_text: app.verify_code()
+                
+        Widget:
+
+        
+        MDRaisedButton:
+            text: 'Verify'
+            size_hint: None,None
+            pos_hint: {'center_x': 0.5}
+            size: dp(150), dp(50)
+            md_bg_color: 1, 0, 0.54, 1
+            on_release: app.verify_code()
+
+        Widget:
+
+<MainApplication>
+    MDBoxLayout:
+        orientation:'vertical'
+        spacing: '20dp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        MDTopAppBar:
+            title: "ChillChat"
+            title_align: 'left'
+            right_action_items: [["dots-vertical", lambda x: app.menu_callback(x)]]
+
+
+        MDBottomNavigation:
+            panel_color: .2, .2, .2, 1
+
+            MDBottomNavigationItem:
+                name: 'Chats'
+                text: 'chats'
+                icon: 'chat'
+                MDRelativeLayout:
+                    id: relative_layout
+                    size_hint: 1, None
+                    height: (root.width/16)*9
+                    pos_hint: {'top': 1}
+                    BoxLayout:
+                        orientation:'vertical'
+                        id: chat_list
+
+                Widget:
+
+
+
+            MDBottomNavigationItem:
+                name: 'Groups'
+                text: 'groups'
+                icon: 'account-group'
+                MDLabel:
+                    text: "Welcome to  groups screen"
+                    halign: "center"
+                    color:
+
+            MDBottomNavigationItem:
+                name: 'Calls'
+                text: 'calls'
+                icon: 'phone'
+                MDLabel:
+                    text: "welcome to calls screen"
+                    halign: "center"
+                    color:
+
+            MDBottomNavigationItem:
+                name: 'Updates'
+                text: 'updates'
+                icon: 'update'
+                MDLabel:
+                    text: "welcome to updates screen"
+                    halign: "center"
+                    color:
+
+            MDBottomNavigationItem:
+                name: 'Mimos'
+                text: 'mimos'
+                icon: 'video'
+                MDLabel:
+                    text: "welcome to mimos screen"
+                    halign: "center"
+                    color:
+
+

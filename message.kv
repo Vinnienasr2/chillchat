@@ -1,0 +1,29 @@
+<MessageScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        
+        MDTopAppBar:
+            title: "Messages"
+            elevation: 10
+            left_action_items: [["arrow-left", lambda x: app.back_to_chat_list()]]
+
+        ScrollView:
+            size_hint_y: 0.8  # Adjust the height as needed
+            BoxLayout:
+                orientation: 'vertical'
+                id: messages_area
+
+        BoxLayout:
+            size_hint_y: 0.1  # Adjust the height as needed
+            MDTextField:
+                id: message_input
+                hint_text: 'Type your message'
+                mode: 'rectangle'
+                multiline: True
+                height: dp(10)
+                # MDTextFieldTrailingIcon:
+                #     icon: "camera-image"
+                
+            MDIconButton:
+                icon: 'send'
+                on_release: app.send_message()
