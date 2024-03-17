@@ -1,0 +1,36 @@
+RegistrationScreen:
+    BoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "10dp"
+            size_hint_y: None
+            height: "48dp"
+
+        MDDropDownItem:
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release: app.open_menu(self)
+
+            MDDropDownItemText:
+                id: drop_text
+                text: "Item"
+
+            MDTextField:
+                id: mobile_number
+                hint_text: "Mobile Number"
+                input_filter: "int"
+                helper_text: "Enter your mobile number"
+                helper_text_mode: "on_focus"
+                mode: "rectangle"
+                icon_right: "cellphone"
+                icon_right_color: app.theme_cls.primary_color
+                size_hint_y: None
+                height: "40dp"
+                pos_hint: {"center_y": 0.5}
+
+        MDRaisedButton:
+            text: "Register"
+            pos_hint: {"center_x": 0.5}
+            on_press: app.on_registration_button_press(country_spinner.text, mobile_number.text)
